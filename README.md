@@ -58,3 +58,29 @@ configs/        YAML configuration files
 ## Citation / license
 
 Add your paper citation here after acceptance. The code can be released under MIT license or another license required by your institution.
+
+
+## v0.2 calibration note
+
+Version 0.2 recalibrates the simulator and evaluation pipeline after an initial sanity check showed unrealistically low packet-delivery ratios and horizon-censored lifetime metrics. The calibration changes are intentionally documented and conservative:
+
+- the radio model now uses configurable adjacency and sink-connectivity thresholds;
+- the packet-success model was softened to avoid unrealistically low multi-hop PDR;
+- lifetime metrics report `NaN` when FND/HND/LND are not reached within the simulation horizon;
+- SE-WSN uses bounded risk broadcasts, adaptive power control, and energy/risk-aware next-hop scoring;
+- `summary_mean_ci.csv` includes means, 95% confidence intervals, sample counts, and not-reached counts for lifetime metrics.
+
+The implementation remains a minimal reproducible simulator, not a hardware testbed. Paper-level conclusions should be based only on outputs generated from `configs/paper.yaml` and multiple seeds.
+
+
+## v0.3 calibration note
+
+Version 0.3 further calibrates the minimal simulator after the v0.2 paper-level run showed that SE-WSN had a strong overhead advantage but did not yet provide a sufficiently balanced lifetime/reliability trade-off. The v0.3 changes are designed to improve scientific defensibility, not to force dominance across all metrics:
+
+- SE-WSN now uses a stronger energy- and risk-aware relay score to delay early node death;
+- adaptive power control is selective rather than uniformly high, preserving the low-overhead/energy-aware character of the method;
+- lifetime plotting automatically omits events such as LND when they are not reached within the simulation horizon;
+- evaluation summaries include operating-window sink connectivity to avoid overinterpreting final-round connectivity after the network is already beyond its useful operating regime;
+- ablation lifetime plots use HND when LND is horizon-censored.
+
+The intended claim for papers using this release is that SE-WSN provides a favorable lifetime--reliability--overhead trade-off under the calibrated simulation setting. It should not be described as universally superior across all metrics.
