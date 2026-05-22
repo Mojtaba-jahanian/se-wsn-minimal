@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "SE-WSN Minimal Reproducible Implementation"
+message: "If you use this software, please cite the associated paper."
+type: software
+authors:
+  - family-names: Jahanian
+    given-names: Mojtaba
+repository-code: "https://github.com/REPLACE_WITH_USERNAME/se-wsn"
+license: MIT

@@ -1,0 +1,9 @@
+experiment:
+  rounds: 1200
+  n_nodes: 100
+  area_m: 300
+  sink: [150, 150]
+  packet_rate: 1.0
+  max_hops: 8
+  methods: [LEACH, HEED, DRL-Routing, T-GCN, SE-WSN]
+  failure_rates: [10, 20, 30, 40]
